@@ -118,4 +118,19 @@ describe("GildedRose shop manager", function () {
         expect(items[0].quality).toBe(50);
         expect(items[0].sellIn).toBe(3);
     });
+
+    it("decreases the quality by two of conjured products", function () {
+        items.push(new Item("Conjured Mana Cake", 7, 49));
+        
+        items = GildedRose.updateQuality(items);
+    
+        var expected = [
+            {sellIn:6, quality:47 },
+        ];
+        expected.forEach(function (testCase, idx) {
+            expect(items[idx].quality).toBe(testCase.quality);
+            expect(items[idx].sellIn).toBe(testCase.sellIn);
+        });
+    });
+
 });
