@@ -32,10 +32,16 @@ const agedBrie = (item) => {
   if (item.quality > 50) { item.quality = 50; }
 };
 
+const conjured = (item) => {
+  item.sellIn -= 1;
+  item.quality = (item.quality - 2) || 0;
+};
+
 const gildedMap = {
   'Sulfuras, Hand of Ragnaros':  sulfuras,
   'Aged Brie': agedBrie,
   'Backstage passes to a TAFKAL80ETC concert': agedBrie,
+  'Conjured Mana Cake': conjured,
 };
 
 GildedRose.updateQuality = function (items) {
