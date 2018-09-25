@@ -21,12 +21,18 @@ const normal = (item) => {
   return item
 };
 
+const sulfuras = (item) => {
+  return item;
+};
+
 GildedRose.updateQuality = function (items) {
   for (var i = 0; i < items.length; i++) {
 
-    if (
+    if (items[i].name === "Sulfuras, Hand of Ragnaros") {
+      items[i] = sulfuras(items[i])
+      continue;
+    } else if (
       !(items[i].name === "Aged Brie")
-      && !(items[i].name === "Sulfuras, Hand of Ragnaros")
       && !(items[i].name === "Backstage passes to a TAFKAL80ETC concert")
     ) {
 
