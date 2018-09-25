@@ -32,15 +32,16 @@ const agedBrie = (item) => {
   if (item.quality > 50) { item.quality = 50; }
 };
 
+const gildedMap = {
+  'Sulfuras, Hand of Ragnaros':  sulfuras,
+  'Aged Brie': agedBrie,
+  'Backstage passes to a TAFKAL80ETC concert': agedBrie,
+};
+
 GildedRose.updateQuality = function (items) {
   items.forEach((item) => {
-    if (item.name === "Sulfuras, Hand of Ragnaros") {
-      sulfuras(item);
-    } else if (item.name === "Aged Brie" || item.name === "Backstage passes to a TAFKAL80ETC concert") {
-      agedBrie(item);
-    } else {
-      normal(item); 
-    }
+    const tickFxn = gildedMap[item.name] || normal;
+    tickFxn(item);
   });
 
   return items;
