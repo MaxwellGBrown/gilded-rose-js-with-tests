@@ -1,9 +1,3 @@
-/*
-    2006-30-84
-    Leeroy was here!!
-    
-    Leeroy <lerooy@example.com>
-*/
 var GildedRose = function () {
   var items = [];
   items.push(new Item("+5 Dexterity Vest", 10, 20));
@@ -15,10 +9,32 @@ var GildedRose = function () {
   GildedRose.updateQuality(items);
 };
 
+const normal = (item) => {
+  item.sellIn -= 1;
+
+  if (item.sellIn < 0) {
+    item.quality = (item.quality - 2) || 0;
+  } else {
+    item.quality = (item.quality - 1) || 0;
+  }
+
+  return item
+};
+
 GildedRose.updateQuality = function (items) {
   for (var i = 0; i < items.length; i++) {
+
+    if (
+      !(items[i].name === "Aged Brie")
+      && !(items[i].name === "Sulfuras, Hand of Ragnaros")
+      && !(items[i].name === "Backstage passes to a TAFKAL80ETC concert")
+    ) {
+
+      items[i] = normal(items[i]); 
+      continue;
+    }
+
     if ("Aged Brie" != items[i].name && "Backstage passes to a TAFKAL80ETC concert" != items[i].name) {
-      //TODO: Improve this code.
       if (items[i].quality > 0) {
         if ("Sulfuras, Hand of Ragnaros" != items[i].name) {
           items[i].quality = items[i].quality - 1
