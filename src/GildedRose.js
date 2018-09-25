@@ -25,17 +25,29 @@ const sulfuras = (item) => {
   return item;
 };
 
+const agedBrie = (item) => {
+  item.sellIn -= 1;
+
+  if (item.sellIn < 0) { item.quality = 0; }
+  else if (item.sellIn <= 5) { item.quality += 3; }
+  else if (item.sellIn <= 10) { item.quality += 2; }
+  else { item.quality += 1; }
+
+  if (item.quality > 50) { item.quality = 50; }
+
+  return item;
+};
+
 GildedRose.updateQuality = function (items) {
   for (var i = 0; i < items.length; i++) {
 
     if (items[i].name === "Sulfuras, Hand of Ragnaros") {
-      items[i] = sulfuras(items[i])
+      items[i] = sulfuras(items[i]);
       continue;
-    } else if (
-      !(items[i].name === "Aged Brie")
-      && !(items[i].name === "Backstage passes to a TAFKAL80ETC concert")
-    ) {
-
+    } else if (items[i].name === "Aged Brie") {
+      items[i] = agedBrie(items[i]);
+      continue;
+    } else if (!(items[i].name === "Backstage passes to a TAFKAL80ETC concert")) {
       items[i] = normal(items[i]); 
       continue;
     }
