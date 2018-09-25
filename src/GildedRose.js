@@ -17,13 +17,9 @@ const normal = (item) => {
   } else {
     item.quality = (item.quality - 1) || 0;
   }
-
-  return item
 };
 
-const sulfuras = (item) => {
-  return item;
-};
+const sulfuras = (item) => {};
 
 const agedBrie = (item) => {
   item.sellIn -= 1;
@@ -34,23 +30,18 @@ const agedBrie = (item) => {
   else { item.quality += 1; }
 
   if (item.quality > 50) { item.quality = 50; }
-
-  return item;
 };
 
 GildedRose.updateQuality = function (items) {
-  for (var i = 0; i < items.length; i++) {
-
-    if (items[i].name === "Sulfuras, Hand of Ragnaros") {
-      items[i] = sulfuras(items[i]);
-      continue;
-    } else if (items[i].name === "Aged Brie" || items[i].name === "Backstage passes to a TAFKAL80ETC concert") {
-      items[i] = agedBrie(items[i]);
-      continue;
+  items.forEach((item) => {
+    if (item.name === "Sulfuras, Hand of Ragnaros") {
+      sulfuras(item);
+    } else if (item.name === "Aged Brie" || item.name === "Backstage passes to a TAFKAL80ETC concert") {
+      agedBrie(item);
     } else {
-      items[i] = normal(items[i]); 
-      continue;
+      normal(item); 
     }
-  }
+  });
+
   return items;
 };
