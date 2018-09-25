@@ -7,13 +7,11 @@ describe("GildedRose shop manager", function () {
     
     it("decreases by 1 the quality and remaining sellIn days of regular items", function () {
         items.push(new Item("+5 Dexterity Vest", 10, 20));
-        items.push(new Item("Conjured Mana Cake", 3, 6));
         
         items = GildedRose.updateQuality(items);
     
         var expected = [
             {sellIn:9 , quality:19},
-            {sellIn:2 , quality:5 }
         ];
         expected.forEach(function (testCase, idx) {
             expect(items[idx].quality).toBe(testCase.quality);
